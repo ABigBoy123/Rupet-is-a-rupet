@@ -68,7 +68,10 @@ var countries = ["america", "britain", "france", "germany", "italy", "japan", "r
     
 }*/
 
-var flag = new Image;
+function updatePoints() {
+    console.log("You hit a flag")
+}
+
 
 function createFlag() {
     var rect = canvas.getBoundingClientRect();
@@ -84,19 +87,20 @@ function createFlag() {
         var tag = document.createElement('img');
         tag.src = 'img/' + countries[Math.floor(Math.random() * countries.length)] + '.png';
         tag.style.position = 'absolute';
-        tag.style.height = '50px';
-        tag.style.width = '50px';
+        tag.style.height = (60 * img.height / img.width) + 'px';
+        tag.style.width = '60px';
         tag.id = "temp"
-        tag.style.top = rect.top + 1 + 'px';
-        tag.style.left = rect.left + 1 + 'px';
+        tag.onclick = "updatePoints()";
+        tag.style.top = rect.top + Math.floor(Math.random() * (canvasHeight - 80)) + 'px';
+        tag.style.left = rect.left + Math.floor(Math.random() * (canvasWidth - 80)) + 'px';
         document.body.appendChild(tag);
        
     }
     setTimeout(function() {
         document.getElementById("temp").remove()
-    }, 500);
+    }, (1000 + Math.floor(Math.random() * 1000)));
 }
 
-for (let i = 0; i < 30; i++) {
-    createFlag()
-}
+const interval = setInterval(function() {
+    createFlag();
+}, (500 + Math.floor(Math.random() * 1000)));
