@@ -49,11 +49,54 @@ document.addEventListener('mousedown', function(e) {
 }, false)
 
 // Make flags appear
-var intervalID = window.setInterval(createFlag, 500);
+var countries = ["america", "britain", "france", "germany", "italy", "japan", "russia"]
+// var intervalID = window.setInterval(createFlag, 500);
+
+/*function createFlag() {
+    var country = countries[Math.floor(Math.random() * countries.length)]
+    var img = new Image;
+    img.src = 'img/' + country + '.png';
+    img.id = "tempFlag"
+    let ctx = canvas.getContext("2d");
+    canvasWidth = canvas.offsetWidth;
+    canvasHeight = canvas.offsetHeight;
+    let x = Math.floor(Math.random() * canvasWidth);
+    let y = Math.floor(Math.random() * canvasHeight);
+    ctx.drawImage(img, x, y, 15, 15 * img.height / img.width)
+    console.log(x)
+    console.log(y)
+    
+}*/
+
+var flag = new Image;
 
 function createFlag() {
-    var img = new Image;
-    img.src = 'img/france.png';
-    let ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 10, 10, 50, 40)
+    var rect = canvas.getBoundingClientRect();
+    canvasWidth = canvas.offsetWidth;
+    canvasHeight = canvas.offsetHeight;
+    let x = Math.floor(Math.random() * canvasWidth);
+    let y = Math.floor(Math.random() * canvasHeight);
+    
+
+    if(x < 0 || y < 0 || x > canvasWidth || y > canvasHeight){
+
+    } else {
+        var tag = document.createElement('img');
+        tag.src = 'img/' + countries[Math.floor(Math.random() * countries.length)] + '.png';
+        tag.style.position = 'absolute';
+        tag.style.height = '50px';
+        tag.style.width = '50px';
+        tag.id = "temp"
+        tag.style.top = rect.top + 1 + 'px';
+        tag.style.left = rect.left + 1 + 'px';
+        document.body.appendChild(tag);
+       
+    }
+    setTimeout(function() {
+        document.getElementById("temp").remove()
+    }, 500);
+}
+
+for (let i = 0; i < 30; i++) {
+    createFlag()
 }
