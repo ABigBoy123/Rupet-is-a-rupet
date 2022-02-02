@@ -16,11 +16,7 @@ let registerSubmit = () => {
 // Game code
 let canvas = document.getElementById("canvas");
 
-const dropBomb = () => {
-    let mousePos = getMousePos(canvas, evt);
-    alert(mousePos)
-}
-
+// Drop bombs
 var img = new Image;
 img.src = 'img/explosion.png';
 
@@ -49,7 +45,15 @@ document.addEventListener('mousedown', function(e) {
     }
     setTimeout(function() {
         document.getElementById("temp").remove()
-      }, 500);
-
-   
+    }, 500);
 }, false)
+
+// Make flags appear
+var intervalID = window.setInterval(createFlag, 500);
+
+function createFlag() {
+    var img = new Image;
+    img.src = 'img/france.png';
+    let ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 10, 10, 50, 40)
+}
