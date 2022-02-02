@@ -16,6 +16,7 @@ let registerSubmit = () => {
 // Game code
 let canvas = document.getElementById("canvas");
 
+
 // Drop bombs
 var img = new Image;
 img.src = 'img/explosion.png';
@@ -37,67 +38,46 @@ document.addEventListener('mousedown', function(e) {
         tag.style.position = 'absolute';
         tag.style.height = '50px';
         tag.style.width = '50px';
-        tag.id = "temp"
+        tag.id = "temp";
         tag.style.top = (e.pageY || e.clientY) - 30 + 'px';
         tag.style.left = (e.pageX || e.clientX) - 25 + 'px';
         this.body.appendChild(tag);
        
     }
-    setTimeout(function() {
-        document.getElementById("temp").remove()
-    }, 500);
+    var element = document.getElementById("temp");
+    if (element != 'undefined' && element != null) {
+        setTimeout(function() {
+            document.getElementById("temp").remove();
+        }, 500);
+    }
+    
 }, false)
 
-// Make flags appear
-var countries = ["america", "britain", "france", "germany", "italy", "japan", "russia"]
-// var intervalID = window.setInterval(createFlag, 500);
-
-/*function createFlag() {
-    var country = countries[Math.floor(Math.random() * countries.length)]
-    var img = new Image;
-    img.src = 'img/' + country + '.png';
-    img.id = "tempFlag"
-    let ctx = canvas.getContext("2d");
-    canvasWidth = canvas.offsetWidth;
-    canvasHeight = canvas.offsetHeight;
-    let x = Math.floor(Math.random() * canvasWidth);
-    let y = Math.floor(Math.random() * canvasHeight);
-    ctx.drawImage(img, x, y, 15, 15 * img.height / img.width)
-    console.log(x)
-    console.log(y)
-    
-}*/
 
 function updatePoints() {
     console.log("You hit a flag")
 }
 
+// Make flags appear
+var countries = ["america", "britain", "france", "germany", "italy", "japan", "russia"]
 
 function createFlag() {
     var rect = canvas.getBoundingClientRect();
     canvasWidth = canvas.offsetWidth;
     canvasHeight = canvas.offsetHeight;
-    let x = Math.floor(Math.random() * canvasWidth);
-    let y = Math.floor(Math.random() * canvasHeight);
+    var tag = document.createElement('img');
+    tag.src = 'img/' + countries[Math.floor(Math.random() * countries.length)] + '.png';
+    tag.style.position = 'absolute';
+    tag.style.height = (60 * img.height / img.width) + 'px';
+    tag.style.width = '60px';
+    tag.id = "tempFlag";
+    tag.addEventListener("click", updatePoints, false);
+    tag.style.top = rect.top + Math.floor(Math.random() * (canvasHeight - 80)) + 'px';
+    tag.style.left = rect.left + Math.floor(Math.random() * (canvasWidth - 80)) + 'px';
+    document.body.appendChild(tag);
     
-
-    if(x < 0 || y < 0 || x > canvasWidth || y > canvasHeight){
-
-    } else {
-        var tag = document.createElement('img');
-        tag.src = 'img/' + countries[Math.floor(Math.random() * countries.length)] + '.png';
-        tag.style.position = 'absolute';
-        tag.style.height = (60 * img.height / img.width) + 'px';
-        tag.style.width = '60px';
-        tag.id = "temp"
-        tag.onclick = "updatePoints()";
-        tag.style.top = rect.top + Math.floor(Math.random() * (canvasHeight - 80)) + 'px';
-        tag.style.left = rect.left + Math.floor(Math.random() * (canvasWidth - 80)) + 'px';
-        document.body.appendChild(tag);
-       
-    }
     setTimeout(function() {
-        document.getElementById("temp").remove()
+        document.getElementById("tempFlag").remove()
     }, (1000 + Math.floor(Math.random() * 1000)));
 }
 
