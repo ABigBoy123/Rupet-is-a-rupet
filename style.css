@@ -1,0 +1,72 @@
+/* Universal styles */
+p, h1, h2, h3, h4, h5, label, button {
+    font-family: "Trirong", serif;
+}
+
+button, .registerform, .loginform {
+    background-color: #ffffff;
+    border: 2px solid #65532F;
+}
+button:hover, .registerform:hover, .loginform:hover  {
+    background-color: #E8E8E8;
+    border: 2px solid #312509;
+}
+
+.header {
+    padding: 20px;
+    text-align: center;
+    background: #798478;
+    color: white;
+    font-size: 30px;
+}
+
+.small {
+    height: 100px;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.buttons {
+    margin: auto;
+    text-align: center;
+    width: 30%;
+    border: 3px solid #4D6A6D;
+    padding: 10px;
+}
+
+button {
+    width: 50%;
+    height: 50px;
+}
+
+/* Instructions page */
+.instructions {
+    width: 30%;
+    margin: auto;
+    text-align: center;
+}
+
+/* Register & Login form */
+.register, .login {
+    margin: auto;
+    text-align: center;
+    width: 40%;
+}
+
+.registerform, .loginform {
+    width: 40%;
+    height: 60px;
+    margin: 5px;
+}
+
+/* Game board */
+.gameboard {
+    width: 90%;
+    text-align: center;
+    margin: auto;
+}
+canvas {
+    background-image: url("img/europe.jpg");
+    background-size: 100%;
+    width: 80%;
+}

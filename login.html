@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+    <title>Login</title>
+</head>
+<body>
+    <!--Header-->
+    <div class="small header">
+        <h1>WW2 Defence</h1>
+    </div>
+    <!--Login form-->
+    <div class="login">
+        <h1>Register:</h1>
+        <form action="">
+            <br>
+            <label for="name">Username:</label><br>
+            <input type="text" name="name" id="name" required><br><br>
+            <label for="password">Password:</label><br>
+            <input type="password" name="password" id="password" required><br><br>
+            <input type="submit" value="Submit" class="loginform" onclick="loginCheck()">
+            <input type="reset" value="Reset" class="loginform">
+        </form>
+        <br>
+        <p>Haven't registered yet? Click here to register:</p><br>
+        <button onclick="document.location='register.html'">Register</button>
+    </div>
+    <br>
+    <!--Footer-->
+    <div class="buttons">  
+        <button onclick="document.location='index.html'">Click here to return home</button><br><br>
+        <button onclick="document.location='instructions.html'">Instructions</button><br><br>
+        <button onclick="document.location='game.html'">Play Game</button>
+    </div>
+</body>
+</html>

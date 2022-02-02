@@ -1,0 +1,55 @@
+// Register Code
+let registerSubmit = () => {
+    const fname = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    if (fname.length == 0 || email.length == 0 || password.length == 0) {
+        alert("Please fill in all fields");
+    }else if (email.includes("@") == false) {
+        alert("Please enter a valid email");
+    }    
+    else {
+        alert("This is what would be saved in a text file if we could use node.js:\n" + email + ", " + fname + ", " + password);
+    }
+}
+
+// Game code
+let canvas = document.getElementById("canvas");
+
+const dropBomb = () => {
+    let mousePos = getMousePos(canvas, evt);
+    alert(mousePos)
+}
+
+var img = new Image;
+img.src = 'explosion.png';
+
+document.addEventListener('mousedown', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+    canvasWidth = canvas.offsetWidth;
+    canvasHeight = canvas.offsetHeight;
+
+    document.getElementById("x").innerHTML = x;
+    document.getElementById("y").innerHTML = y;
+    document.getElementById("w").innerHTML = canvasWidth;
+    document.getElementById("h").innerHTML = canvasHeight;
+
+    if(x < 0 || y < 0 || x > canvasWidth || y > canvasHeight){
+
+    } else {
+        e = e || window.event;
+        var tag = document.createElement('img');
+        console.log(e);
+        tag.src = img.src;
+        tag.style.position = 'absolute';
+        tag.style.height = '50px';
+        tag.style.width = '50px';
+        tag.style.top = (e.pageY || e.clientY) - 30 + 'px';
+        tag.style.left = (e.pageX || e.clientX) - 25 + 'px';
+        this.body.appendChild(tag);
+    }
+
+    
+}, false)
