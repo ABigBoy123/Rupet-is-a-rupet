@@ -28,7 +28,10 @@ document.addEventListener('mousedown', function(e) {
     canvasWidth = canvas.offsetWidth;
     canvasHeight = canvas.offsetHeight;
 
-    if(x < 0 || y < 0 || x > canvasWidth || y > canvasHeight){
+    
+	
+	// Create an explosion
+	if(x < 0 || y < 0 || x > canvasWidth || y > canvasHeight){
 
     } else {
         e = e || window.event;
@@ -38,6 +41,7 @@ document.addEventListener('mousedown', function(e) {
         tag.style.position = 'absolute';
         tag.style.height = '50px';
         tag.style.width = '50px';
+		tag.style.pointerEvents = "none";
         tag.id = "temp";
         tag.style.top = (e.pageY || e.clientY) - 30 + 'px';
         tag.style.left = (e.pageX || e.clientX) - 25 + 'px';
@@ -53,9 +57,10 @@ document.addEventListener('mousedown', function(e) {
     
 }, false)
 
-
-function updatePoints() {
-    console.log("You hit a flag")
+function updatePoints(){
+	let score = document.getElementById("score").innerHTML;
+	score = parseInt(score) + 1;
+	document.getElementById("score").innerHTML = score;
 }
 
 // Make flags appear
@@ -71,16 +76,21 @@ function createFlag() {
     tag.style.height = (60 * img.height / img.width) + 'px';
     tag.style.width = '60px';
     tag.id = "tempFlag";
-    tag.addEventListener("click", updatePoints, false);
     tag.style.top = rect.top + Math.floor(Math.random() * (canvasHeight - 80)) + 'px';
     tag.style.left = rect.left + Math.floor(Math.random() * (canvasWidth - 80)) + 'px';
     document.body.appendChild(tag);
     
+	//Check if the flag is clicked
+	tag.addEventListener("mousedown", e => {
+		updatePoints();	
+	})
+	
     setTimeout(function() {
         document.getElementById("tempFlag").remove()
-    }, (1000 + Math.floor(Math.random() * 1000)));
+    }, (1000 + Math.floor(Math.random() * 500)));
 }
 
 const interval = setInterval(function() {
     createFlag();
-}, (500 + Math.floor(Math.random() * 1000)));
+}, (1500 + Math.floor(Math.random() * 1000)));
+

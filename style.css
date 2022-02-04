@@ -66,12 +66,12 @@ button {
     margin: auto;
 }
 canvas {
-    background-image: url("img/europe.png");
+    background-image: url("img/europe.jpg");
     background-size: 100%;
     width: 80%;
 }
 
 /* Change cursor */
 canvas, #temp, #tempFlag {
-    cursor: url("img/crosshair.ico"), crosshair;
+cursor: url("img/crosshair.ico") 15 10, crosshair;
 }
