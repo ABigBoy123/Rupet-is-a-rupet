@@ -73,5 +73,5 @@ canvas {
 
 /* Change cursor */
 canvas, #temp, #tempFlag {
-cursor: url("img/crosshair.ico") 15 10, crosshair;
+    cursor: url("img/crosshair.ico") 15 10, crosshair;
 }
