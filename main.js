@@ -93,6 +93,8 @@ function updatePoints(flag){
 
 canvas.addEventListener("mousedown", function() {
     if (!gameEnd) {
+        var scream = new Audio("sound/scream.m4a");
+        scream.play();
         let health = document.getElementById("civilianHealth");
 	    health.value--;
     }
