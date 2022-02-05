@@ -59,6 +59,11 @@ button {
     margin: 5px;
 }
 
+/* Home buton game*/
+.returnHome {
+    text-align: center;
+}
+
 /* Game board */
 .gameboard {
     width: 90%;
@@ -74,4 +79,27 @@ canvas {
 /* Change cursor */
 canvas, #temp, #tempFlag {
     cursor: url("img/crosshair.ico") 15 10, crosshair;
+}
+
+/*Add Health bars*/
+.healthLabel {
+    display: inline;
+    padding-left: 15%;
+}
+
+progress {
+    width: 60%;
+    height: 20px;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #798478;
+}
+
+#axisHealth::-webkit-progress-value {
+    background-color: #B3001B;
+}
+
+#civilianHealth::-webkit-progress-value {
+    background-color: #255C99;
 }

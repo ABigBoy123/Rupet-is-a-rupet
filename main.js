@@ -48,8 +48,14 @@ document.addEventListener('mousedown', function(e) {
             tag.style.top = (e.pageY || e.clientY) - 30 + 'px';
             tag.style.left = (e.pageX || e.clientX) - 25 + 'px';
             this.body.appendChild(tag);
+            // Play sound
+            var sound;
+            let soundFile = Math.floor((Math.random() * 5) + 1);
+            sound = new Audio("sound/explosion" + soundFile + ".wav");
+            sound.play();
         
         }
+        
         var element = document.getElementById("temp");
         if (element != 'undefined' && element != null) {
             setTimeout(function() {
@@ -68,21 +74,27 @@ function updatePoints(flag){
     flag = flag.slice(sliceStart, -4);
     console.log(flag);
     if (axis.includes(flag)) {
-        let health = parseInt(document.getElementById("axisHealth").innerHTML);
-        health--;
-        document.getElementById("axisHealth").innerHTML = health;
+        let health = document.getElementById("axisHealth");
+        health.value--;
     }else if (allies.includes(flag)) {
-        let health = parseInt(document.getElementById("allyHealth").innerHTML);
-        health--;
-        document.getElementById("allyHealth").innerHTML = health;
+        let health = document.getElementById("allyHealth");
+        health.value--;
+    }else if(flag == "russia") {
+        let decideSide = Math.floor((Math.random() * 2) + 1);
+        if (decideSide == 1) {
+            let health = document.getElementById("axisHealth");
+            health.value--;
+        }else {
+            let health = document.getElementById("allyHealth");
+            health.value--;
+        }
     }
 }
 
 canvas.addEventListener("mousedown", function() {
     if (!gameEnd) {
-        let health = parseInt(document.getElementById("civilianHealth").innerHTML);
-	    health--;
-        document.getElementById("civilianHealth").innerHTML = health;
+        let health = document.getElementById("civilianHealth");
+	    health.value--;
     }
 })
 
@@ -124,16 +136,38 @@ function endGame() {
     gameEnd = true
 }
 
+function endGameMessage(deathMessage) {
+    var rect = canvas.getBoundingClientRect();
+    canvasWidth = canvas.offsetWidth;
+    canvasHeight = canvas.offsetHeight;
+    var tag = document.createElement('img');
+    tag.src = 'img/' + deathMessage + '.png';
+    tag.style.position = 'absolute';
+    tag.style.height = (50 * img.height / img.width) + '%';
+    tag.style.width = '50%';
+    tag.id = "tempFlag";
+    tag.style.top = rect.top + 100 + 'px';
+    tag.style.left = rect.left + 200 + 'px';
+    document.body.appendChild(tag);
+}
+
+function restartGame() {
+    location.reload();
+}
+
 // Check if game ends
 setInterval(function() {
-    let axisHealth = parseInt(document.getElementById("axisHealth").innerHTML);
-    let allyHealth = parseInt(document.getElementById("allyHealth").innerHTML);
-    let civilianHealth = parseInt(document.getElementById("civilianHealth").innerHTML);
+    let axisHealth = document.getElementById("axisHealth").value;
+    let allyHealth = document.getElementById("allyHealth").value;
+    let civilianHealth = document.getElementById("civilianHealth").value;
     if (axisHealth <= 0) {
         endGame();
+        endGameMessage("youwin");
     }else if (allyHealth <= 0) {
         endGame();
+        endGameMessage("axiswin");
     }else if (civilianHealth <= 0) {
         endGame();
+        endGameMessage("civiliansdead");
     }
 }, 100);
